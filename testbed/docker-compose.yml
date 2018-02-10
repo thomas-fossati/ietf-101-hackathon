@@ -1,0 +1,76 @@
+version: '3'
+
+services:
+  # QUIC client
+  client:
+    build:
+      context: nodes/client
+    entrypoint: /root/entrypoint.bash "client" ${DOMAIN1_ROUTER_ADDR} ${DOMAIN2_SUBNET}
+    container_name: client
+    networks:
+      domain1:
+        ipv4_address: ${DOMAIN1_CLIENT_ADDR}
+    extra_hosts:
+      - "server:${DOMAIN2_SERVER_ADDR}" 
+      - "router:${DOMAIN1_ROUTER_ADDR}"
+    volumes:
+      - ./volumes:/root/share
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    stdin_open: true
+    tty: true
+
+  # QUIC server
+  server:
+    build:
+      context: nodes/server
+    entrypoint: /root/entrypoint.bash "server" ${DOMAIN2_ROUTER_ADDR} ${DOMAIN1_SUBNET}
+    container_name: server
+    networks:
+      domain2:
+        ipv4_address: ${DOMAIN2_SERVER_ADDR}
+    extra_hosts:
+      - "client:${DOMAIN1_CLIENT_ADDR}" 
+      - "router:${DOMAIN2_ROUTER_ADDR}"
+    volumes:
+      - ./volumes:/root/share
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    stdin_open: true
+    tty: true
+
+  # router
+  router:
+    build:
+      context: nodes/router
+    entrypoint: /root/entrypoint.bash "router"
+    container_name: router
+    networks:
+      domain2:
+        ipv4_address: ${DOMAIN2_ROUTER_ADDR}
+      domain1:
+        ipv4_address: ${DOMAIN1_ROUTER_ADDR}
+    extra_hosts:
+      - "client:${DOMAIN1_CLIENT_ADDR}" 
+      - "server:${DOMAIN2_SERVER_ADDR}"
+    volumes:
+      - ./volumes:/root/share
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    stdin_open: true
+    tty: true
+
+networks:
+  domain1:
+    ipam:
+      config:
+        - subnet: ${DOMAIN1_SUBNET}
+  domain2:
+    ipam:
+      config:
+        - subnet: ${DOMAIN2_SUBNET}
+
+# vim: ai ts=2 sw=2 et sts=2 ft=yaml
