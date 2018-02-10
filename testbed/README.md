@@ -3,7 +3,7 @@
 make -C baseimg
 ```
 
-## Compose
+## Compose targets
 
 - Will build images before starting containers and network:
 ```bash
@@ -44,7 +44,7 @@ The testbed is divided into two domains (1 and 2) connected by the router node.
 
 Loss/reordering/latency/rate are applied independently on a per domain and direction basis.
 
-A setup is completely declared by populating the following four variables using tc-netem(8) syntax:
+A setup is completely declared by populating the following four variables using [netem](https://wiki.linuxfoundation.org/networking/netem) syntax:
 
 - `DOMAIN1_UPLINK_CONFIG`
 - `DOMAIN1_DOWNLINK_CONFIG`
@@ -84,7 +84,7 @@ docker-compose exec server ping client
 docker-compose exec client ping server
 ```
 
-If anything goes wrong half-way through, reset the qdisc configuration to the default:
+If anything goes wrong half-way through, reset the qdisc configuration to its default:
 ```
 bin/link-reset.bash
 ```
