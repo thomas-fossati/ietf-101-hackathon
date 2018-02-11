@@ -38,16 +38,15 @@ readonly CONFIG="$1"
 # read links configuration from the supplied file and network configuration
 # from .env 
 . "${CONFIG}"
-
 . .env
 
-# containers must be up & running for this to work
+# containers must be up & running for the script to work
 expect_containers_are_running
 
 # reset qdiscs on all containers
 reset_qdiscs
 
-# map link names to the right containers' interfaces
+# map link names to the correct containers' interface
 readonly linkmap__DOMAIN1_UPLINK_CONFIG="client eth0"
 readonly linkmap__DOMAIN2_DOWNLINK_CONFIG="server eth0"
 # TODO(tho) compute the following two dynamically from .env and current
@@ -64,8 +63,8 @@ do
     n=linkmap__${k}
     # ( vars[0] vars[1] ) <=> ( container-name network-interface )
     vars=( ${!n} )
-    cmd="tc qdisc add dev ${vars[1]} root netem ${!k}"
     echo ">>> Applying rule ${!k} to ${vars[0]}:${vars[1]}"
+    cmd="tc qdisc add dev ${vars[1]} root netem ${!k}"
     docker-compose exec ${vars[0]} ${cmd}
   else
     echo ">>> Skipping empty $k"
