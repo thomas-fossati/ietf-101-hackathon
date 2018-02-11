@@ -1,14 +1,14 @@
 #!/bin/bash
 
-set -exu
+set -eu
 
 reset_qdiscs() {
-  echo ">>> Resetting qdiscs on every interfaces of every container"
+  echo ">>> Resetting qdiscs on every interface of every container"
   for s in client server router
   do
     for iface in eth0 eth1
     do
-      docker-compose exec ${s} tc qdisc del dev ${iface} root || true
+      docker-compose exec ${s} tc qdisc del dev ${iface} root 2>&1 > /dev/null || true
     done
   done
 }
@@ -21,7 +21,7 @@ expect_containers_are_running() {
     x=$(docker-compose ps -q client)
     if [ -z "${x}" ]
     then
-      echo ">>> $s MUST be running"
+      echo ">>> Node ${s} MUST be running (run 'make up' or 'make build-up')"
       exit 1
     fi
   done
@@ -65,6 +65,7 @@ do
     # ( vars[0] vars[1] ) <=> ( container-name network-interface )
     vars=( ${!n} )
     cmd="tc qdisc add dev ${vars[1]} root netem ${!k}"
+    echo ">>> Applying rule ${!k} to ${vars[0]}:${vars[1]}"
     docker-compose exec ${vars[0]} ${cmd}
   else
     echo ">>> Skipping empty $k"
