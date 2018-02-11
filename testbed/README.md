@@ -26,7 +26,7 @@ make sh-server
 make sh-router
 ```
 
-(On MacOSX, if using iTerm2, invoking `make iterms` creates a window with a tile with an interactive shell for each testbed node.)
+(On MacOSX, if using iTerm2, `make iterms` creates a window with a tile and an interactive shell for each testbed node.)
 
 
 To stop the containers and shutdown the compose network:
