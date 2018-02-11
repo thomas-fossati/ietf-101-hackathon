@@ -1,26 +1,23 @@
 ## Base image
+First thing to do is create the base Docker image that is used for all the nodes in the testbed:
 ```bash
 make -C baseimg
 ```
 
 ## Compose targets
+The testbed is started with one of `build-up` or `up`.
 
-- Will build images before starting containers and network:
+- Use `build-up` when you need to build nodes' images before starting containers and network (for example, the very first time or after you change the nodes' images in some way - e.g., when modifying the entrypoint script):
 ```bash
 make build-up
 ```
 
-- Start containers and network:
+- Use `up` in all other cases:
 ```bash
 make up
 ```
 
-- Stop containers and shutdown network
-```bash
-make down
-```
-
-- Start an interactive shell in the client node (or server, or router):
+To start an interactive shell in the `client` (or `server`, or `router`) node:
 ```bash
 make sh-client
 
@@ -29,9 +26,17 @@ make sh-server
 make sh-router
 ```
 
+(On MacOSX, if using iTerm2, invoking `make iterms` creates a window with a tile with an interactive shell for each testbed node.)
+
+
+To stop the containers and shutdown the compose network:
+```bash
+make down
+```
+
 ## Configuration
 
-The testbed is divided into two domains (1 and 2) connected by the router node.
+The testbed is divided into two domains ('1' and '2') connected by the router node.
 
 ```
 +---------------------+---------------------+
@@ -44,7 +49,7 @@ The testbed is divided into two domains (1 and 2) connected by the router node.
 
 Loss/reordering/latency/rate are applied independently on a per domain and direction basis.
 
-A setup is completely declared by populating the following four variables using [netem](https://wiki.linuxfoundation.org/networking/netem) syntax:
+Thus, a test setup is completely declared by populating the following four variables using [netem](https://wiki.linuxfoundation.org/networking/netem) syntax:
 
 - `DOMAIN1_UPLINK_CONFIG`
 - `DOMAIN1_DOWNLINK_CONFIG`
@@ -72,7 +77,7 @@ DOMAIN2_DOWNLINK_CONFIG="loss 0.1%"
 
 In order to apply this configuration to a new compose instance, run:
 ```bash
-bin/link-config.bash
+bin/link-config.bash conf/ex1.conf
 ```
 
 A quick test to check that the expected configuration is in place:
