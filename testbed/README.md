@@ -1,5 +1,5 @@
 ## Base image
-First thing to do is create the base Docker image that is used for all the nodes in the testbed:
+First thing to do is creating the base Docker image that is used for all the nodes in the testbed:
 ```bash
 make -C baseimg
 ```
