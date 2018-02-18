@@ -12,7 +12,7 @@ top: ; docker-compose top
 
 # Dynamically create each sh-<node> rule
 define interactive_shell_template
-sh-$(1): up ; docker exec -ti $(1) bash
+sh-$(1): ; docker exec -ti $(1) bash
 endef
 
 $(foreach node,$(NODES),$(eval $(call interactive_shell_template,$(node))))
