@@ -90,6 +90,11 @@ docker-compose exec client ping server
 ```
 
 If anything goes wrong half-way through, reset the qdisc configuration to its default:
-```
+```bash
 bin/link-reset.bash
+```
+
+To create a picture of a given configuration (for example `ex1.conf`) - including per-link characteristics and addressing of all the involved nodes - use the following command:
+```bash
+bin/dot-conf.bash conf/ex1.conf
 ```
