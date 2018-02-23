@@ -1,0 +1,10 @@
+{
+    "poll_interval_ms": 500,
+    "http_port": 8080,
+    "interfaces": [
+        {
+            "name": "eth0",
+            "domain": "domain-2"
+        }
+    ]
+}
