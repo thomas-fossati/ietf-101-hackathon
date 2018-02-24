@@ -47,12 +47,12 @@ expect_containers_are_running
 reset_qdiscs
 
 # map link names to the correct containers' interface
-readonly linkmap__DOMAIN1_UPLINK_CONFIG="client eth0"
-readonly linkmap__DOMAIN2_DOWNLINK_CONFIG="server eth0"
+readonly linkmap__DOMAIN1_UPLINK_CONFIG="client eth1"
+readonly linkmap__DOMAIN2_DOWNLINK_CONFIG="server eth1"
 # TODO(tho) compute the following two dynamically from .env and current
 # container instantiation
-readonly linkmap__DOMAIN1_DOWNLINK_CONFIG="router eth0"
-readonly linkmap__DOMAIN2_UPLINK_CONFIG="router eth1"
+readonly linkmap__DOMAIN1_DOWNLINK_CONFIG="router eth1"
+readonly linkmap__DOMAIN2_UPLINK_CONFIG="router eth2"
 
 # apply configuration
 for k in "DOMAIN1_UPLINK_CONFIG" "DOMAIN1_DOWNLINK_CONFIG" \

@@ -3,7 +3,7 @@
     "http_port": 8080,
     "interfaces": [
         {
-            "name": "eth0",
+            "name": "eth1",
             "domain": "domain-2-downstream"
         }
     ]

@@ -3,11 +3,11 @@
     "http_port": 8080,
     "interfaces": [
         {
-            "name": "eth0",
+            "name": "eth1",
             "domain": "domain-1-downstream"
         },
         {
-            "name": "eth1",
+            "name": "eth2",
             "domain": "domain-2-upstream"
         }
     ]
