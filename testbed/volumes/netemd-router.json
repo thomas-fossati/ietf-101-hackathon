@@ -4,11 +4,11 @@
     "interfaces": [
         {
             "name": "eth0",
-            "domain": "domain-1"
+            "domain": "domain-1-downstream"
         },
         {
             "name": "eth1",
-            "domain": "domain-2"
+            "domain": "domain-2-upstream"
         }
     ]
 }

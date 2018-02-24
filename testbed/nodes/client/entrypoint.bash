@@ -12,4 +12,4 @@ ip route add ${DST_SUBNET} via ${GW}
 # prompt
 echo export PS1="\"[${NODE_NAME}] \\W # \"" > /root/.bashrc
 
-bash
+/go/bin/netemd --config /root/share/netemd-client.json
