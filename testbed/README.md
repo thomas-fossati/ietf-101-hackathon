@@ -94,7 +94,19 @@ If anything goes wrong half-way through, reset the qdisc configuration to its de
 bin/link-reset.bash
 ```
 
-To create a picture of a given configuration (for example `ex1.conf`) - including per-link characteristics and addressing of all the involved nodes - use the following command:
+To create a picture of a given configuration (for example [ex2.conf](conf/ex2.conf)) - including per-link characteristics and addressing of all the involved nodes - use the following command:
 ```bash
-bin/dot-conf.bash conf/ex1.conf
+bin/dot-conf.bash conf/ex2.conf
 ```
+
+Something like the following should show up:
+
+![Alt text](pics/ex2.conf.png?raw=true "configuration pic")
+
+
+# Dashboards
+
+Navigate to [http://localhost:8888/sources/0/dashboards/1](http://localhost:8888/sources/0/dashboards/1).  What should pop up is something like the following:
+
+![Alt text](pics/dashboards.png?raw=true "dashboards pic")
+
