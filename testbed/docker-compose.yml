@@ -5,17 +5,16 @@ services:
   client:
     build:
       context: nodes/client
-    entrypoint: /root/entrypoint.bash "client" ${DOMAIN1_ROUTER_ADDR} ${DOMAIN2_SUBNET}
+    entrypoint: /root/entrypoint.bash "client" ${CLIENT_DOMAIN_ROUTER_ADDR} ${SERVER_DOMAIN_SUBNET}
     container_name: client
     networks:
-      domain1:
-        ipv4_address: ${DOMAIN1_CLIENT_ADDR}
-      datacollection:
+      client_domain:
+        ipv4_address: ${CLIENT_DOMAIN_CLIENT_ADDR}
+      data_collection:
     ports:
       - "8081:8080"
     extra_hosts:
-      - "server:${DOMAIN2_SERVER_ADDR}" 
-      - "router:${DOMAIN1_ROUTER_ADDR}"
+      - "server:${SERVER_DOMAIN_SERVER_ADDR}"
     volumes:
       - ./volumes:/root/share
     cap_add:
@@ -28,17 +27,16 @@ services:
   server:
     build:
       context: nodes/server
-    entrypoint: /root/entrypoint.bash "server" ${DOMAIN2_ROUTER_ADDR} ${DOMAIN1_SUBNET}
+    entrypoint: /root/entrypoint.bash "server" ${SERVER_DOMAIN_ROUTER_ADDR} ${CLIENT_DOMAIN_SUBNET}
     container_name: server
     networks:
-      domain2:
-        ipv4_address: ${DOMAIN2_SERVER_ADDR}
-      datacollection:
+      server_domain:
+        ipv4_address: ${SERVER_DOMAIN_SERVER_ADDR}
+      data_collection:
     ports:
       - "8082:8080"
     extra_hosts:
-      - "client:${DOMAIN1_CLIENT_ADDR}" 
-      - "router:${DOMAIN2_ROUTER_ADDR}"
+      - "client:${CLIENT_DOMAIN_CLIENT_ADDR}"
     volumes:
       - ./volumes:/root/share
     cap_add:
@@ -54,16 +52,16 @@ services:
     entrypoint: /root/entrypoint.bash "router"
     container_name: router
     networks:
-      domain2:
-        ipv4_address: ${DOMAIN2_ROUTER_ADDR}
-      domain1:
-        ipv4_address: ${DOMAIN1_ROUTER_ADDR}
-      datacollection:
+      server_domain:
+        ipv4_address: ${SERVER_DOMAIN_ROUTER_ADDR}
+      client_domain:
+        ipv4_address: ${CLIENT_DOMAIN_ROUTER_ADDR}
+      data_collection:
     ports:
       - "8083:8080"
-    extra_hosts:
-      - "client:${DOMAIN1_CLIENT_ADDR}" 
-      - "server:${DOMAIN2_SERVER_ADDR}"
+#     extra_hosts:
+#       - "client:${CLIENT_DOMAIN_CLIENT_ADDR}"
+#       - "server:${SERVER_DOMAIN_SERVER_ADDR}"
     volumes:
       - ./volumes:/root/share
     cap_add:
@@ -72,61 +70,49 @@ services:
     stdin_open: true
     tty: true
 
-  # storage/graphing infra
-  # Telegraf
+  # measurement store, analysis & graphing infra
   telegraf:
     image: telegraf:1.4.0
     container_name: telegraf
     volumes:
       - ./etc/telegraf.conf:/etc/telegraf/telegraf.conf
     networks:
-      datacollection:
+      data_collection:
     ports:
       - "8092:8092/udp"
       - "8094:8094"
       - "8125:8125/udp"
-  # InfluxDB
+
   influxdb:
     image: influxdb:1.3.5
     container_name: influxdb
     networks:
-      datacollection:
+      data_collection:
     volumes:
       - ./data/influxdb:/var/lib/influxdb
     ports:
       - "8086:8086"
-  # Chronograf
+
   chronograf:
     image: chronograf:1.3.8
     container_name: chronograf
     environment:
       INFLUXDB_URL: http://influxdb:8086
     networks:
-      datacollection:
+      data_collection:
     ports:
       - "8888:8888"
-  # Define a service for using the influx CLI tool.
-  # docker-compose run influxdb-cli
-  influxdb-cli:
-    image: influxdb:1.3.5
-    container_name: influxdb-cli
-    entrypoint:
-      - influx
-      - -host
-      - influxdb
-    networks:
-      datacollection:
 
 networks:
-  domain1:
+  client_domain:
     ipam:
       config:
-        - subnet: ${DOMAIN1_SUBNET}
-  domain2:
+        - subnet: ${CLIENT_DOMAIN_SUBNET}
+  server_domain:
     ipam:
       config:
-        - subnet: ${DOMAIN2_SUBNET}
-  datacollection:
+        - subnet: ${SERVER_DOMAIN_SUBNET}
+  data_collection:
 
 
 # vim: ai ts=2 sw=2 et sts=2 ft=yaml

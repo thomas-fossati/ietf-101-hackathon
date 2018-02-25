@@ -1,3 +1,4 @@
+# TODO(tho) factor out
 FROM alpine_3.7-transport-measurability:latest
 
 # Get netemd source and dependencies

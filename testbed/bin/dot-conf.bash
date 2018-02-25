@@ -22,10 +22,10 @@ cat << EOF | dot -T${OFMT} -o ${OFILE}
 digraph G {
   rankdir = LR
 
-  C  [label = "${DOMAIN1_CLIENT_ADDR}"]
-  R1 [label = "${DOMAIN1_ROUTER_ADDR}"]
-  R2 [label = "${DOMAIN2_ROUTER_ADDR}"]
-  S  [label = "${DOMAIN2_SERVER_ADDR}"]
+  C  [label = "${CLIENT_DOMAIN_CLIENT_ADDR}"]
+  R1 [label = "${CLIENT_DOMAIN_ROUTER_ADDR}"]
+  R2 [label = "${SERVER_DOMAIN_ROUTER_ADDR}"]
+  S  [label = "${SERVER_DOMAIN_SERVER_ADDR}"]
 
   subgraph cluster_C {
     label = "client"
@@ -44,15 +44,19 @@ digraph G {
   }
 
   # uplink
-  C -> R1 [label = "${DOMAIN1_UPLINK_CONFIG}", color = "red", fontcolor = "red"]
-  R2 -> S [label = "${DOMAIN2_UPLINK_CONFIG}", color = "red", fontcolor = "red"]
+  C -> R1 [label = "${CLIENT_DOMAIN_UPLINK_CONFIG}", color = "red", fontcolor = "red"]
+  R2 -> S [label = "${SERVER_DOMAIN_UPLINK_CONFIG}", color = "red", fontcolor = "red"]
 
   # downlink
-  S -> R2 [label = "${DOMAIN2_DOWNLINK_CONFIG}", color = "blue", fontcolor = "blue"]
-  R1 -> C [label = "${DOMAIN1_DOWNLINK_CONFIG}", color = "blue", fontcolor = "blue"]
+  S -> R2 [label = "${SERVER_DOMAIN_DOWNLINK_CONFIG}", color = "blue", fontcolor = "blue"]
+  R1 -> C [label = "${CLIENT_DOMAIN_DOWNLINK_CONFIG}", color = "blue", fontcolor = "blue"]
 }
 EOF
 
-open ${OFILE}
+if [ "$(uname)" == "Darwin" ]; then
+  open ${OFILE}
+else
+  echo ">>> test network configuration saved to ${OFILE}"
+fi
 
 # vim: ai ts=2 sw=2 et sts=2 ft=sh

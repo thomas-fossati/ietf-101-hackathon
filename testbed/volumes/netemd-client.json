@@ -3,8 +3,8 @@
     "http_port": 8080,
     "interfaces": [
         {
-            "name": "eth1",
-            "domain": "domain-1-upstream"
+            "tag": "client-domain-uplink",
+            "ipaddr": "172.28.0.2"
         }
     ]
 }
