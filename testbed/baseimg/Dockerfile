@@ -19,6 +19,16 @@ RUN apk add --no-cache \
 
 RUN update-ca-certificates
 
-# Manually bugfix traffic control distributions.  They are actually installed
+RUN go get -u github.com/thomas-fossati/netem-pub/netem \
+              github.com/thomas-fossati/netem-pub/netemd \
+              github.com/spf13/viper \
+              github.com/spf13/cobra
+
+# Compile and install netemd
+RUN cd /go/src/github.com/thomas-fossati/netem-pub/netemd && go install
+
+# Manually fix traffic control distributions.  They are actually installed
 # but not in the location tc expects to find them.
 RUN ln -s /usr/lib/tc /lib/tc
+
+
