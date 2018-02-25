@@ -4,11 +4,11 @@
     "interfaces": [
         {
             "tag": "client-domain-downlink",
-            "ipaddr": "172.28.0.3"
+            "ipaddr": "@CLIENT_DOMAIN_ROUTER_ADDR@"
         },
         {
             "tag": "server-domain-uplink",
-	    "ipaddr": "172.29.0.3"
+	    "ipaddr": "@SERVER_DOMAIN_ROUTER_ADDR@"
         }
     ]
 }

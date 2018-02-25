@@ -16,7 +16,7 @@ services:
     extra_hosts:
       - "server:${SERVER_DOMAIN_SERVER_ADDR}"
     volumes:
-      - ./volumes:/root/share
+      - ./etc/client:/root/share
     cap_add:
       - NET_ADMIN
       - SYS_ADMIN
@@ -38,7 +38,7 @@ services:
     extra_hosts:
       - "client:${CLIENT_DOMAIN_CLIENT_ADDR}"
     volumes:
-      - ./volumes:/root/share
+      - ./etc/server:/root/share
     cap_add:
       - NET_ADMIN
       - SYS_ADMIN
@@ -60,7 +60,7 @@ services:
     ports:
       - "8083:8080"
     volumes:
-      - ./volumes:/root/share
+      - ./etc/router:/root/share
     cap_add:
       - NET_ADMIN
       - SYS_ADMIN
@@ -72,7 +72,7 @@ services:
     image: telegraf:1.4.0
     container_name: telegraf
     volumes:
-      - ./etc/telegraf.conf:/etc/telegraf/telegraf.conf
+      - ./etc/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
     networks:
       data_collection:
     ports:

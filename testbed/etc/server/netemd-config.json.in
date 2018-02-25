@@ -3,8 +3,8 @@
     "http_port": 8080,
     "interfaces": [
         {
-            "tag": "client-domain-uplink",
-            "ipaddr": "172.28.0.2"
+            "tag": "server-domain-downlink",
+	    "ipaddr": "@SERVER_DOMAIN_SERVER_ADDR@"
         }
     ]
 }
