@@ -94,6 +94,8 @@ If anything goes wrong half-way through, reset the qdisc configuration to its de
 bin/link-reset.bash
 ```
 
+# Configuration
+
 To create a picture of a given configuration (for example [ex2.conf](conf/ex2.conf)) - including per-link characteristics and addressing of all the involved nodes - use the following command:
 ```bash
 bin/dot-conf.bash conf/ex2.conf
