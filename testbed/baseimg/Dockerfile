@@ -17,6 +17,8 @@ RUN apk add --no-cache \
       tshark \
       util-linux
 
+RUN apk add hping3 --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing --update-cache
+
 RUN update-ca-certificates
 
 RUN go get -u github.com/thomas-fossati/netem-pub/netem \
@@ -26,6 +28,7 @@ RUN go get -u github.com/thomas-fossati/netem-pub/netem \
 
 # Compile and install netemd
 RUN cd /go/src/github.com/thomas-fossati/netem-pub/netemd && go install
+
 
 # Manually fix traffic control distributions.  They are actually installed
 # but not in the location tc expects to find them.

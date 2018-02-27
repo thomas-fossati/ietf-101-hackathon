@@ -4,7 +4,8 @@
     "interfaces": [
         {
             "tag": "server-domain-downlink",
-	    "ipaddr": "@SERVER_DOMAIN_SERVER_ADDR@"
+	    "ipaddr": "@SERVER_DOMAIN_SERVER_ADDR@",
+	    "ping_host": "router"
         }
     ]
 }

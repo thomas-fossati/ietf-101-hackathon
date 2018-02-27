@@ -4,7 +4,8 @@
     "interfaces": [
         {
             "tag": "client-domain-uplink",
-            "ipaddr": "@CLIENT_DOMAIN_CLIENT_ADDR@"
+            "ipaddr": "@CLIENT_DOMAIN_CLIENT_ADDR@",
+	    "ping_host": "router"
         }
     ]
 }

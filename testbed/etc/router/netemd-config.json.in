@@ -4,11 +4,13 @@
     "interfaces": [
         {
             "tag": "client-domain-downlink",
-            "ipaddr": "@CLIENT_DOMAIN_ROUTER_ADDR@"
+            "ipaddr": "@CLIENT_DOMAIN_ROUTER_ADDR@",
+	    "ping_host": "client"
         },
         {
             "tag": "server-domain-uplink",
-	    "ipaddr": "@SERVER_DOMAIN_ROUTER_ADDR@"
+	    "ipaddr": "@SERVER_DOMAIN_ROUTER_ADDR@",
+	    "ping_host": "server"
         }
     ]
 }
