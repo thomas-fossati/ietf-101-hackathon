@@ -11,7 +11,9 @@ node_interface_for_domain() {
   local node=$1
   local domain_network=$2
 
-  docker-compose exec ${node} ip route get ${domain_network} | head -1 | awk '{print $4}'
+  docker-compose exec ${node} ip route get ${domain_network} \
+    | head -1 \
+    | awk '{print $4}'
 }
 
 # A bunch of handy aliases
@@ -72,19 +74,19 @@ readonly linkmap__SERVER_DOMAIN_UPLINK_CONFIG="router $(router_interface_for_ser
 for k in "CLIENT_DOMAIN_UPLINK_CONFIG" "CLIENT_DOMAIN_DOWNLINK_CONFIG" \
          "SERVER_DOMAIN_UPLINK_CONFIG" "SERVER_DOMAIN_DOWNLINK_CONFIG"
 do
-  # FIXME(tho) Even though no configuration has been supplied at this round, we
+  # Even though no configuration has been supplied at this round, we
   # still need to drop any settings that are currently active on the interface.
+  n=linkmap__${k}
+  # ( vars[0] vars[1] ) <=> ( container-name network-interface )
+  vars=( ${!n} )
+
+  # Drop previous configuration (if any)
+  echo ">>> [${vars[0]}:${vars[1]}] reset qdisc"
+  reset_cmd="tc qdisc del dev ${vars[1]} root"
+  docker-compose exec ${vars[0]} ${reset_cmd} || true
+
   if [ ! -z "${!k}" ]
   then
-    n=linkmap__${k}
-    # ( vars[0] vars[1] ) <=> ( container-name network-interface )
-    vars=( ${!n} )
-
-    # Drop previous configuration (if any)
-    echo ">>> [${vars[0]}:${vars[1]}] reset qdisc"
-    reset_cmd="tc qdisc del dev ${vars[1]} root"
-    docker-compose exec ${vars[0]} ${reset_cmd} || true
-
     # Apply new configuration
     echo ">>> [${vars[0]}:${vars[1]}] apply rule => ${!k}"
     apply_cmd="tc qdisc add dev ${vars[1]} root netem ${!k}"
