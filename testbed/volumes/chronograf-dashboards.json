@@ -4,9 +4,91 @@
       "id": 1,
       "cells": [
         {
-          "i": "3f054f7a-2fc1-49ac-90f6-ea6902e558f8",
+          "i": "9a3323e2-e62e-4e7f-a045-bd232e868ecf",
+          "x": 0,
+          "y": 0,
+          "w": 12,
+          "h": 5,
+          "name": "End to end delay breakdown",
+          "queries": [
+            {
+              "query": "SELECT mean(\"client-domain-downlink.delay.forward\") AS \"mean_client-domain-downlink.delay.forward\", mean(\"client-domain-uplink.delay.forward\") AS \"mean_client-domain-uplink.delay.forward\", mean(\"server-domain-downlink.delay.forward\") AS \"mean_server-domain-downlink.delay.forward\", mean(\"server-domain-uplink.delay.forward\") AS \"mean_server-domain-uplink.delay.forward\" FROM \"telegraf\".\"autogen\".\"httpjson_netem\" WHERE time > :dashboardTime: GROUP BY :interval:",
+              "queryConfig": {
+                "database": "telegraf",
+                "measurement": "httpjson_netem",
+                "retentionPolicy": "autogen",
+                "fields": [
+                  {
+                    "field": "client-domain-downlink.delay.forward",
+                    "funcs": [
+                      "mean"
+                    ]
+                  },
+                  {
+                    "field": "client-domain-uplink.delay.forward",
+                    "funcs": [
+                      "mean"
+                    ]
+                  },
+                  {
+                    "field": "server-domain-downlink.delay.forward",
+                    "funcs": [
+                      "mean"
+                    ]
+                  },
+                  {
+                    "field": "server-domain-uplink.delay.forward",
+                    "funcs": [
+                      "mean"
+                    ]
+                  }
+                ],
+                "tags": {},
+                "groupBy": {
+                  "time": "auto",
+                  "tags": []
+                },
+                "areTagsAccepted": false,
+                "rawText": null,
+                "range": null
+              }
+            }
+          ],
+          "axes": {
+            "x": {
+              "bounds": [],
+              "label": "",
+              "prefix": "",
+              "suffix": "",
+              "base": "10",
+              "scale": "linear"
+            },
+            "y": {
+              "bounds": [],
+              "label": "",
+              "prefix": "",
+              "suffix": "",
+              "base": "10",
+              "scale": "linear"
+            },
+            "y2": {
+              "bounds": [],
+              "label": "",
+              "prefix": "",
+              "suffix": "",
+              "base": "10",
+              "scale": "linear"
+            }
+          },
+          "type": "line-stacked",
+          "links": {
+            "self": "/chronograf/v1/dashboards/1/cells/9a3323e2-e62e-4e7f-a045-bd232e868ecf"
+          }
+        },
+        {
+          "i": "31d9a34b-2904-483d-90e9-f1d0f674dcf7",
           "x": 8,
-          "y": 12,
+          "y": 17,
           "w": 4,
           "h": 4,
           "name": "Client domain packet reordering (downlink)",
@@ -57,13 +139,13 @@
           },
           "type": "line-plus-single-stat",
           "links": {
-            "self": "/chronograf/v1/dashboards/1/cells/3f054f7a-2fc1-49ac-90f6-ea6902e558f8"
+            "self": "/chronograf/v1/dashboards/1/cells/31d9a34b-2904-483d-90e9-f1d0f674dcf7"
           }
         },
         {
-          "i": "cf11f4c0-1d24-4de7-a59e-fde720a08e70",
+          "i": "1dbeb3b7-5acb-4b10-97c2-567caf5fdc84",
           "x": 8,
-          "y": 8,
+          "y": 13,
           "w": 4,
           "h": 4,
           "name": "Client domain packet reordering (uplink)",
@@ -114,13 +196,13 @@
           },
           "type": "line-plus-single-stat",
           "links": {
-            "self": "/chronograf/v1/dashboards/1/cells/cf11f4c0-1d24-4de7-a59e-fde720a08e70"
+            "self": "/chronograf/v1/dashboards/1/cells/1dbeb3b7-5acb-4b10-97c2-567caf5fdc84"
           }
         },
         {
-          "i": "1b8d8ca8-e1a7-4a09-80bc-c889f31debdc",
+          "i": "d3585902-3a39-45be-a223-cf050a7c03d9",
           "x": 8,
-          "y": 4,
+          "y": 9,
           "w": 4,
           "h": 4,
           "name": "Server domain packet reordering (downlink)",
@@ -171,13 +253,13 @@
           },
           "type": "line-plus-single-stat",
           "links": {
-            "self": "/chronograf/v1/dashboards/1/cells/1b8d8ca8-e1a7-4a09-80bc-c889f31debdc"
+            "self": "/chronograf/v1/dashboards/1/cells/d3585902-3a39-45be-a223-cf050a7c03d9"
           }
         },
         {
-          "i": "f7467071-2f6e-4da5-9b4b-94e48122227a",
+          "i": "4c825920-ba46-460e-aefd-efee80fa80d9",
           "x": 8,
-          "y": 0,
+          "y": 5,
           "w": 4,
           "h": 4,
           "name": "Server domain packet reordering (uplink)",
@@ -228,13 +310,13 @@
           },
           "type": "line-plus-single-stat",
           "links": {
-            "self": "/chronograf/v1/dashboards/1/cells/f7467071-2f6e-4da5-9b4b-94e48122227a"
+            "self": "/chronograf/v1/dashboards/1/cells/4c825920-ba46-460e-aefd-efee80fa80d9"
           }
         },
         {
-          "i": "89fc2475-ab15-4e36-973e-7b01c8dafdb7",
+          "i": "12dcbe91-948f-4ff0-940d-51fa638d3749",
           "x": 4,
-          "y": 8,
+          "y": 13,
           "w": 4,
           "h": 4,
           "name": "Client domain packet drop (uplink)",
@@ -285,13 +367,13 @@
           },
           "type": "line-plus-single-stat",
           "links": {
-            "self": "/chronograf/v1/dashboards/1/cells/89fc2475-ab15-4e36-973e-7b01c8dafdb7"
+            "self": "/chronograf/v1/dashboards/1/cells/12dcbe91-948f-4ff0-940d-51fa638d3749"
           }
         },
         {
-          "i": "5f66007d-81c1-4679-8375-7e73ff96628c",
+          "i": "7ecca3dc-30ff-4cda-bbe7-32103cef388b",
           "x": 4,
-          "y": 12,
+          "y": 17,
           "w": 4,
           "h": 4,
           "name": "Client domain packet drop (downlink)",
@@ -342,13 +424,13 @@
           },
           "type": "line-plus-single-stat",
           "links": {
-            "self": "/chronograf/v1/dashboards/1/cells/5f66007d-81c1-4679-8375-7e73ff96628c"
+            "self": "/chronograf/v1/dashboards/1/cells/7ecca3dc-30ff-4cda-bbe7-32103cef388b"
           }
         },
         {
-          "i": "e189f50d-9e9c-4cbc-aa7f-dbb25a477dc4",
+          "i": "8c3be8a8-abd1-4e46-a757-a4c26cc49fad",
           "x": 4,
-          "y": 4,
+          "y": 9,
           "w": 4,
           "h": 4,
           "name": "Server domain packet drop (downlink)",
@@ -399,13 +481,13 @@
           },
           "type": "line-plus-single-stat",
           "links": {
-            "self": "/chronograf/v1/dashboards/1/cells/e189f50d-9e9c-4cbc-aa7f-dbb25a477dc4"
+            "self": "/chronograf/v1/dashboards/1/cells/8c3be8a8-abd1-4e46-a757-a4c26cc49fad"
           }
         },
         {
-          "i": "cfe02d36-2b52-4646-8484-eb45d0d8fefa",
+          "i": "cff03e4c-a377-4823-92e2-c5d882741a24",
           "x": 4,
-          "y": 0,
+          "y": 5,
           "w": 4,
           "h": 4,
           "name": "Server domain packet drop (uplink)",
@@ -456,13 +538,13 @@
           },
           "type": "line-plus-single-stat",
           "links": {
-            "self": "/chronograf/v1/dashboards/1/cells/cfe02d36-2b52-4646-8484-eb45d0d8fefa"
+            "self": "/chronograf/v1/dashboards/1/cells/cff03e4c-a377-4823-92e2-c5d882741a24"
           }
         },
         {
-          "i": "dde4ef9e-6d60-432a-a585-f107c994e246",
+          "i": "01d6b15f-ee7b-49cc-9b63-60b4ec89db0c",
           "x": 0,
-          "y": 0,
+          "y": 5,
           "w": 4,
           "h": 4,
           "name": "Server domain PPS (uplink)",
@@ -513,13 +595,13 @@
           },
           "type": "line",
           "links": {
-            "self": "/chronograf/v1/dashboards/1/cells/dde4ef9e-6d60-432a-a585-f107c994e246"
+            "self": "/chronograf/v1/dashboards/1/cells/01d6b15f-ee7b-49cc-9b63-60b4ec89db0c"
           }
         },
         {
-          "i": "b580438e-8419-4000-ab80-09525e17c18e",
+          "i": "f10671bc-1398-4b2b-ac9c-36c226c47f97",
           "x": 0,
-          "y": 4,
+          "y": 9,
           "w": 4,
           "h": 4,
           "name": "Server domain PPS (downlink)",
@@ -570,13 +652,13 @@
           },
           "type": "line",
           "links": {
-            "self": "/chronograf/v1/dashboards/1/cells/b580438e-8419-4000-ab80-09525e17c18e"
+            "self": "/chronograf/v1/dashboards/1/cells/f10671bc-1398-4b2b-ac9c-36c226c47f97"
           }
         },
         {
-          "i": "987616ed-0866-4400-ae50-ef9f95b2afeb",
+          "i": "4958b89a-18f8-4759-a293-79481949ebaa",
           "x": 0,
-          "y": 8,
+          "y": 13,
           "w": 4,
           "h": 4,
           "name": "Client domain PPS (uplink)",
@@ -627,13 +709,13 @@
           },
           "type": "line",
           "links": {
-            "self": "/chronograf/v1/dashboards/1/cells/987616ed-0866-4400-ae50-ef9f95b2afeb"
+            "self": "/chronograf/v1/dashboards/1/cells/4958b89a-18f8-4759-a293-79481949ebaa"
           }
         },
         {
-          "i": "506c83f8-fbca-4d92-aa9f-ca7d884a5eed",
+          "i": "3e60e47c-412e-4518-bfe6-4e0938a32ca2",
           "x": 0,
-          "y": 12,
+          "y": 17,
           "w": 4,
           "h": 4,
           "name": "Client domain PPS (downlink)",
@@ -684,7 +766,7 @@
           },
           "type": "line",
           "links": {
-            "self": "/chronograf/v1/dashboards/1/cells/506c83f8-fbca-4d92-aa9f-ca7d884a5eed"
+            "self": "/chronograf/v1/dashboards/1/cells/3e60e47c-412e-4518-bfe6-4e0938a32ca2"
           }
         }
       ],

@@ -1,5 +1,5 @@
 {
-    "poll_interval_ms": 500,
+    "poll_interval_ms": 250,
     "http_port": 8080,
     "interfaces": [
         {
