@@ -20,7 +20,6 @@ cat ${DASHBOARD} \
     --header "Accept: application/json" \
     --dump-header - \
     --data @- \
-    --data @- \
     --output /dev/null \
     ${CHRONOGRAF}
 
