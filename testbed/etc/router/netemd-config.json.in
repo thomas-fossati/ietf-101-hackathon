@@ -5,12 +5,12 @@
         {
             "tag": "client-domain-downlink",
             "ipaddr": "@CLIENT_DOMAIN_ROUTER_ADDR@",
-	    "ping_host": "client"
+	    "ping_host": "@CLIENT_DOMAIN_CLIENT_ADDR@"
         },
         {
             "tag": "server-domain-uplink",
 	    "ipaddr": "@SERVER_DOMAIN_ROUTER_ADDR@",
-	    "ping_host": "server"
+	    "ping_host": "@SERVER_DOMAIN_SERVER_ADDR@"
         }
     ]
 }

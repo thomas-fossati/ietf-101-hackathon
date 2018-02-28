@@ -5,7 +5,7 @@
         {
             "tag": "server-domain-downlink",
 	    "ipaddr": "@SERVER_DOMAIN_SERVER_ADDR@",
-	    "ping_host": "router"
+	    "ping_host": "@SERVER_DOMAIN_ROUTER_ADDR@"
         }
     ]
 }

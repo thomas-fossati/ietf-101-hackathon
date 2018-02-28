@@ -5,7 +5,7 @@
         {
             "tag": "client-domain-uplink",
             "ipaddr": "@CLIENT_DOMAIN_CLIENT_ADDR@",
-	    "ping_host": "router"
+	    "ping_host": "@CLIENT_DOMAIN_ROUTER_ADDR@"
         }
     ]
 }
