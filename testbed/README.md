@@ -10,14 +10,7 @@ The testbed is based on [Docker Compose](docker-compose.yml) and looks a bit lik
 
 If you are confused by the above pic, the following provides a simplified view that only takes the test networks into consideration:
 
-```
-+---------------------+---------------------+
-|   --------up------> | --------up------>   |
-| C                   R                   S |
-|   <------down------ | <------down------   |
-+---------------------+---------------------+
-      client domain       server domain
-```
+![Alt text](pics/ex0.conf.png?raw=true "simple pic")
 
 The most important thing to note here is that network characterisation (loss, reordering, duplication and latencies) can be specified independently for each domain and direction.
 
