@@ -44,7 +44,7 @@ $ make up
 ```
 $ make dash
 ```
-Look for a 201 Created status code from the Chronograf server.  This is the signal that the dashboards have been created and can now be viewed at [http://localhost:8888/sources/0/dashboards/1](http://localhost:8888/sources/0/dashboards/1).  What should pop up is something like the following:
+Look for a 201 Created status code from the Chronograf server.  This is the signal that the dashboards have been installed and can now be viewed at [http://localhost:8888/sources/0/dashboards/1](http://localhost:8888/sources/0/dashboards/1).  What should pop up is something like the following:
 
 ![Alt text](pics/dashboards.png?raw=true "pre-canned dashboards")
 
