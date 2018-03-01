@@ -50,7 +50,7 @@ Look for a 201 Created status code from the Chronograf server.  This is the sign
 
 The dashboard on top shows the end-to-end latency breakdown.  Each line represents a one-way delay measure (client->router, router->client, router->server, server->router) in milliseconds.
 
-Each network segment has its own dashboard for PPS, reordering and loss per direction.
+PPS, reordering and loss are represented in a 4x3 grid with separate graphs per each network segment and direction.
 
 # Configuration
 
@@ -62,6 +62,8 @@ A test setup is completely declared by populating the following four variables u
 - `SERVER_DOMAIN_DOWNLINK_CONFIG`
 
 If a key is empty, the configuration for the corresponding link/direction is skipped.
+
+The names of the variables refer to which link & direction the configuration applies to.  (Refer to the pic on top of this page if you feel lost with the naming convention.)
 
 Example (see also `config/ex1.conf`):
 ```
@@ -87,7 +89,6 @@ $ bin/link-config.bash conf/ex1.conf
 
 A quick test to check that the expected configuration is in place:
 ```
-# downlink
 $ docker-compose exec server ping client
 ```
 
