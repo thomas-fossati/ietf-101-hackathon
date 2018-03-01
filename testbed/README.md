@@ -1,4 +1,4 @@
-# What is this?
+# What is this about?
 
 This package is meant to provide a testbed for measuring the effects of varying network conditions on transport protocols.
 
