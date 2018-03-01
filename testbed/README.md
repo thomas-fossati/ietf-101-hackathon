@@ -100,3 +100,5 @@ $ bin/dot-conf.bash conf/ex2.conf
 Something like the following should show up:
 
 ![Alt text](pics/ex2.conf.png?raw=true "configuration pic")
+
+Have fun!
