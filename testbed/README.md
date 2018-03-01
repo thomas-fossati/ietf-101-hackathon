@@ -1,42 +1,14 @@
-## Base image
-First thing to do is creating the base Docker image that is used for all the nodes in the testbed:
-```bash
-make -C baseimg
-```
+# What is this?
 
-## Compose targets
-The testbed is started with one of `build-up` or `up`.
+This package is meant to provide a testbed for measuring the effects of varying network conditions on transport protocols.
 
-- Use `build-up` when you need to build nodes' images before starting containers and network (for example, the very first time or after you change the nodes' images in some way - e.g., when modifying the entrypoint script):
-```bash
-make build-up
-```
+The testbed consists of two networks connected by a router node and a third (separate) network hosting the measurements store and analysis / visualisation harness.
 
-- Use `up` in all other cases:
-```bash
-make up
-```
+The testbed is based on [Docker Compose](docker-compose.yml) and looks a bit like this:
 
-To start an interactive shell in the `client` (or `server`, or `router`) node:
-```bash
-make sh-client
+![Alt text](pics/docker-compose.png?raw=true "docker compose network")
 
-Or:
-make sh-server
-make sh-router
-```
-
-(On MacOSX, if using iTerm2, `make iterms` creates a window with a tile and an interactive shell for each testbed node.)
-
-
-To stop the containers and shutdown the compose network:
-```bash
-make down
-```
-
-## Configuration
-
-The testbed is divided into two domains ('client' and 'server') connected by the router node.
+If you are confused by the above pic, the following provides a simplified view that only takes the test networks into consideration:
 
 ```
 +---------------------+---------------------+
@@ -47,9 +19,46 @@ The testbed is divided into two domains ('client' and 'server') connected by the
       client domain       server domain
 ```
 
-Loss/reordering/latency/rate are applied independently on a per domain and direction basis.
+The most important thing to note here is that network characterisation (loss, reordering, duplication and latencies) can be specified independently for each domain and direction.
 
-Thus, a test setup is completely declared by populating the following four variables using [netem](https://wiki.linuxfoundation.org/networking/netem) syntax:
+# Setup
+
+Before proceeding, make sure the required dependencies are installed.  See the top level [README.md](../README.md) for the details.
+
+## Get the software
+```
+$ git clone https://github.com/thomas-fossati/ietf-101-hackathon.git
+```
+
+## Enter the testbed
+```
+$ cd ietf-101-hackathon/testbed
+```
+
+## Build the base Docker image
+This step creates the base Docker image shared by all test nodes - client, router and server:
+```
+$ make -C baseimg
+```
+
+## Start the Docker Compose network
+The following command starts the whole testbed, including the store and dashboarding components:
+```
+$ make up
+```
+
+## Push the pre-canned dashboards to Chronograf
+```
+$ make dash
+```
+Look for a 201 Created status code from the Chronograf server.  This is the signal that the dashboards have been created and can now be viewed at [http://localhost:8888/sources/0/dashboards/1](http://localhost:8888/sources/0/dashboards/1).  What should pop up is something like the following:
+
+![Alt text](pics/dashboards.png?raw=true "pre-canned dashboards")
+
+
+# Configuration
+
+A test setup is completely declared by populating the following four variables using [netem](https://wiki.linuxfoundation.org/networking/netem) syntax:
 
 - `CLIENT_DOMAIN_UPLINK_CONFIG`
 - `CLIENT_DOMAIN_DOWNLINK_CONFIG`
@@ -76,39 +85,21 @@ SERVER_DOMAIN_DOWNLINK_CONFIG="loss 0.1%"
 ```
 
 In order to apply this configuration to a new compose instance, run:
-```bash
-bin/link-config.bash conf/ex1.conf
+```
+$ bin/link-config.bash conf/ex1.conf
 ```
 
 A quick test to check that the expected configuration is in place:
-```bash
+```
 # downlink
-docker-compose exec server ping client
-
-# uplink
-docker-compose exec client ping server
+$ docker-compose exec server ping client
 ```
-
-If anything goes wrong half-way through, reset the qdisc configuration to its default:
-```bash
-bin/link-reset.bash
-```
-
-# Configuration
 
 To create a picture of a given configuration (for example [ex2.conf](conf/ex2.conf)) - including per-link characteristics and addressing of all the involved nodes - use the following command:
-```bash
-bin/dot-conf.bash conf/ex2.conf
+```
+$ bin/dot-conf.bash conf/ex2.conf
 ```
 
 Something like the following should show up:
 
 ![Alt text](pics/ex2.conf.png?raw=true "configuration pic")
-
-
-# Dashboards
-
-Navigate to [http://localhost:8888/sources/0/dashboards/1](http://localhost:8888/sources/0/dashboards/1).  What should pop up is something like the following:
-
-![Alt text](pics/dashboards.png?raw=true "dashboards pic")
-
