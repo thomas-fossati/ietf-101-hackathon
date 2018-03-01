@@ -8,7 +8,7 @@ The [testbed](docker-compose.yml) is based on Docker Compose and looks a bit lik
 
 ![Alt text](pics/docker-compose.png?raw=true "docker compose network")
 
-If you are confused by the above pic, the following provides a simplified view that only takes the test networks into consideration:
+If you are confused by the pic above, the following provides a simplified view that only takes the test networks into consideration:
 
 ![Alt text](pics/ex0.conf.png?raw=true "simple pic")
 
