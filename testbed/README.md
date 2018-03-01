@@ -80,7 +80,7 @@ SERVER_DOMAIN_UPLINK_CONFIG="loss 0.3% 25%"
 SERVER_DOMAIN_DOWNLINK_CONFIG="loss 0.1%"
 ```
 
-In order to apply this configuration to a new compose instance, run:
+In order to apply this configuration to a running testbed instance, run:
 ```
 $ bin/link-config.bash conf/ex1.conf
 ```
