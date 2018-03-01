@@ -48,6 +48,9 @@ Look for a 201 Created status code from the Chronograf server.  This is the sign
 
 ![Alt text](pics/dashboards.png?raw=true "pre-canned dashboards")
 
+The dashboard on top shows the end-to-end latency breakdown.  Each line represents a one-way delay measure (client->router, router->client, router->server, server->router) in milliseconds.
+
+Each network segment has its own dashboard for PPS, reordering and loss per direction.
 
 # Configuration
 
