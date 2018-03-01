@@ -4,7 +4,7 @@ This package is meant to provide a testbed for measuring the effects of varying 
 
 The testbed consists of two networks connected by a router node and a third (separate) network hosting the measurements store and analysis / visualisation harness.
 
-The testbed is based on [Docker Compose](docker-compose.yml) and looks a bit like this:
+The [testbed](docker-compose.yml) is based on Docker Compose and looks a bit like this:
 
 ![Alt text](pics/docker-compose.png?raw=true "docker compose network")
 
