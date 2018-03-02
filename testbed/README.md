@@ -52,7 +52,7 @@ The dashboard on top shows the end-to-end latency breakdown.  Each line represen
 
 PPS, reordering and loss are represented in a 4x3 grid with separate graphs per each network segment and direction.
 
-The default dashboards represent the point of view of an omniscient observer: one who has complete, accurate and timely knowledge of both the end-to-end and all the intermediate paths.  These dashboards serve as a reference for less capable on-path observers and can be extended at will (look [here](dashboards/README.md) to know how).
+The default dashboards is the point of view of an omniscient observer: one who has complete, accurate and timely knowledge of both the end-to-end and all the intermediate paths.  These dashboards serve as a reference for less capable on-path observers and can be extended at will (look [here](dashboards/README.md) to know how).
 
 Loss, reordering and PPS are sampled at 4Hz, roughly.
 The latency samples (collected via active ICMP timestamp/replay on each network segment) have the same frequency but might be impacted by loss (in fact, high loss rates tend to create gaps/drops in the latency graph).
