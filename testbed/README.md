@@ -104,6 +104,8 @@ A quick test to check that the expected configuration is in place:
 $ docker-compose exec server ping client
 ```
 
+## Taking a snapshot
+
 To create a picture of a given configuration (for example [ex2.conf](conf/ex2.conf)) - including per-link characteristics and addressing of all the involved nodes - use the following command:
 ```
 $ bin/dot-conf.bash conf/ex2.conf
