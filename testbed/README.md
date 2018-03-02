@@ -79,18 +79,18 @@ The names of the variables refer to which link & direction the configuration app
 
 Example (`conf/ex1.conf`):
 ```
-# add latency in uplink on domain 1 using uniform distribution in range
+# add latency in uplink on client domain using uniform distribution in range
 # [90ms-110ms]
 CLIENT_DOMAIN_UPLINK_CONFIG="delay 100ms 10ms"
 
-# downlink in domain 1 is the perfect channel
+# downlink in client domain is the perfect channel
 CLIENT_DOMAIN_DOWNLINK_CONFIG=
 
-# add random packet drop in uplink on domain 2 with probability 0.3% and 25%
+# add random packet drop in uplink on server domain with probability 0.3% and 25%
 # correlation with drop decision for previous packet
 SERVER_DOMAIN_UPLINK_CONFIG="loss 0.3% 25%"
 
-# add random packet drop in downlink on domain 2 with probability 0.1%
+# add random packet drop in downlink on server domain with probability 0.1%
 SERVER_DOMAIN_DOWNLINK_CONFIG="loss 0.1%"
 ```
 
