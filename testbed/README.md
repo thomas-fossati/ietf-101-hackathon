@@ -66,14 +66,14 @@ In order to add custom data sources:
 
 # Configuration
 
-A test setup is completely declared by populating the following four variables using [netem](https://wiki.linuxfoundation.org/networking/netem) syntax:
+A test setup is completely configured by populating the following four variables using [netem](https://wiki.linuxfoundation.org/networking/netem) syntax:
 
 - `CLIENT_DOMAIN_UPLINK_CONFIG`
 - `CLIENT_DOMAIN_DOWNLINK_CONFIG`
 - `SERVER_DOMAIN_UPLINK_CONFIG`
 - `SERVER_DOMAIN_DOWNLINK_CONFIG`
 
-If a key is empty, the configuration for the corresponding link/direction is skipped.
+If a key is empty, the configuration for the corresponding link/direction is cleared.
 
 The names of the variables refer to which link & direction the configuration applies to.  (Refer to the pic on top of this page if you feel lost with the naming convention.)
 
