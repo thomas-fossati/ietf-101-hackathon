@@ -38,7 +38,7 @@ expect_containers_are_running() {
 
   for s in client server router
   do
-    x=$(docker-compose ps -q client)
+    x=$(docker-compose ps -q ${s})
     if [ -z "${x}" ]
     then
       echo ">>> Node ${s} MUST be running (run 'make up' or 'make build-up')"
