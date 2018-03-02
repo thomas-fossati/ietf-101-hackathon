@@ -77,7 +77,7 @@ If a key is empty, the configuration for the corresponding link/direction is cle
 
 The names of the variables refer to which link & direction the configuration applies to.  (Refer to the pic on top of this page if you feel lost with the naming convention.)
 
-Example (see also `config/ex1.conf`):
+Example (`conf/ex1.conf`):
 ```
 # add latency in uplink on domain 1 using uniform distribution in range
 # [90ms-110ms]
