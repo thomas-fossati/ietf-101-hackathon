@@ -60,7 +60,7 @@ The latency samples (collected via active ICMP timestamp/replay on each network 
 ## Adding new data sources
 In order to add custom data sources:
   - Create an HTTP endpoint to publish your samples (in Go, you can use the [expvar](https://golang.org/pkg/expvar/) framework);
-  - Add your endpoint to the `httpjson` inputs section in [telegraf.conf](etc/telegraf/telegraf.conf);
+  - Add your endpoint to the `httpjson` inputs section in [telegraf.conf](etc/telegraf/telegraf.conf#L70);
   - Create the Chronograf dashboard (click [here](https://docs.influxdata.com/chronograf/v1.4/introduction/getting-started/) to know how);
   - Remember to export and stash somewhere the dashboards that you plan to reuse in the future as they are not preserved across restarts of the testbed (forking this repo and sending PRs is most welcome).
 
