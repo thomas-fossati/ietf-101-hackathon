@@ -55,7 +55,7 @@ PPS, reordering and loss are represented in a 4x3 grid with separate graphs per 
 This is the point of view of an omniscient observer: one who has complete, accurate and timely knowledge of both the end-to-end and all the intermediate paths.  These dashboards serve as a reference for less capable on-path observers and can be extended at will (look [here](dashboards/README.md) to know how).
 
 Loss, reordering and PPS are sampled at 4Hz, roughly (see [netemd-config](etc/router/netemd-config.json.in)).
-The latency samples (collected via active ICMP timestamp/replay on each network segment) are collected at the same frequency, but might be impacted by loss (in fact, high loss rates tend to create gaps/drops in the latency graph).
+The latency samples (collected via active ICMP timestamp/replay probes on each network segment) are collected at the same frequency, but might be impacted by loss (in fact, high loss rates tend to create gaps/drops in the latency graph).
 
 ## Adding new data sources
 In order to add custom data sources:
