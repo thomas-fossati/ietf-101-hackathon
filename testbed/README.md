@@ -29,7 +29,7 @@ $ cd ietf-101-hackathon/testbed
 ```
 
 ## Build the base Docker image
-This step creates the base Docker image shared by all test nodes - client, router and server:
+This step creates the base [Docker image](baseimg/Dockerfile) shared by all test nodes - client, router and server:
 ```
 $ make -C baseimg
 ```
